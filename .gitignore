@@ -1,0 +1,35 @@
+# Ignore database files, e.g., dumps or backups
+dvdrental*
+
+# Ignore virtual environment directories
+venv/
+.env
+env/
+
+# Ignore compiled Python files
+__pycache__/
+**/__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignore dependency files (optional if using Docker or virtual environments)
+poetry.lock
+Pipfile.lock
+
+# Ignore environment and secrets files
+.env
+*.env
+
+# Ignore editor or system files
+.idea/
+.vscode/
+.DS_Store
+
+# Ignore logs
+*.log
+
+# Ignore any other Python cache or distribution files
+*.egg-info/
+dist/
+build/
