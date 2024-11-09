@@ -18,11 +18,14 @@ from typing_extensions import Annotated
 router = APIRouter(prefix='/posts', tags=['Posts'])
 
 @router.get('/', response_model=List[PostResponseSchema])
-def get_posts(session:SessionDep, user:AuthUserDepend):
+def get_posts(session:SessionDep, user:AuthUserDepend, limit:int=10, skip:int=0, search:str=''):
 
     stmt = select(Post)
+    if len(search):
+        stmt = stmt.where(col(Post.title).icontains(search))
+    stmt = stmt.offset(skip).limit(limit)
     posts = session.exec(stmt).all()
-    print('get user', user)
+
     return posts
 
 

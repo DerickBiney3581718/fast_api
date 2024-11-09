@@ -2,6 +2,7 @@ from fastapi import FastAPI, Response, status, HTTPException, Depends
 from fastapi.exceptions import ResponseValidationError, RequestValidationError
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from fastapi.responses import PlainTextResponse, JSONResponse
+from fastapi.middleware.cors import CORSMiddleware
 from models.Post import Post
 from utils.auth import TokenDepend, get_current_user, get_pass_hash, create_access_token,verify_password, user_data_valid
 from db import engine, SessionDep
@@ -14,6 +15,17 @@ from models.User import User
 from typing_extensions import Annotated
 
 app = FastAPI()
+
+
+origins = []
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 @app.exception_handler(ResponseValidationError)
@@ -30,3 +42,5 @@ app.include_router(posts.router)
 @app.get('/')   
 async def root():
     return {'message':'hello world'}
+
+# Godaddy, A2, 

@@ -6,6 +6,7 @@ from datetime import datetime
 from models.User import User
 
 class Post(SQLModel, table=True):
+    __tablename__ = 'posts'
     id: Optional[int] = Field(default=None, primary_key=True)
     title: Annotated[str, Query(min_length=10)]
     published: bool
